@@ -1,0 +1,16 @@
+
+services:
+  plans: http://localhost:8081
+  auth: http://localhost:8082
+
+internal:
+  token: afe65bcd93be0f27d04415f68b9b6ca33f909553ad54c3966cd719a7e44606c1
+  key: X-Internal-Token
+security:
+  jwt:
+    token:
+      secret-key: uH12jPqz0W+o+fSde9q5Tf0mXEtmCqKnm2Vp3xczxUg=
+      expire-lenght: 3600000
+spring:
+  main:
+    web-application-type: reactive
