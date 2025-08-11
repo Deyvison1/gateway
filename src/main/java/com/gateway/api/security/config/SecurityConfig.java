@@ -1,6 +1,7 @@
 package com.gateway.api.security.config;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
@@ -35,19 +36,19 @@ public class SecurityConfig {
 	public SecurityConfig(RoleBasedAuthorizationManager authorizationManager) {
 		this.authorizationManager = authorizationManager;
 	}
-
 	@Bean
 	public SecurityWebFilterChain securityFilterChain(ServerHttpSecurity http) {
-		return http.csrf(ServerHttpSecurity.CsrfSpec::disable)
-				.authorizeExchange(exchanges -> exchanges.pathMatchers("/auth", "/auth/signin").permitAll() // rotas
-																											// públicas
-						.anyExchange().access(authorizationManager) // demais rotas requerem token
-				)
-				.oauth2ResourceServer(
-						oauth2 -> oauth2.jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter())))
-				.build();
+	    return http
+	            .csrf(ServerHttpSecurity.CsrfSpec::disable)
+	            .authorizeExchange(exchanges -> exchanges
+	                    .pathMatchers("/auth", "/auth/signin").permitAll()
+	                    .anyExchange().access(authorizationManager)
+	            )
+	            .oauth2ResourceServer(oauth2 -> oauth2
+	                    .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter()))
+	            )
+	            .build();
 	}
-
 	@Bean
 	public Converter<Jwt, ? extends Mono<AbstractAuthenticationToken>> jwtAuthenticationConverter() {
 		JwtAuthenticationConverter converter = new JwtAuthenticationConverter();

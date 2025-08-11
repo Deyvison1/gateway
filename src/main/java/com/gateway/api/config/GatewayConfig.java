@@ -47,6 +47,10 @@ public class GatewayConfig {
 	private static final String CATEGORIES_IMPORT_PATH = "/api/categories/import";
 	private static final String CATEGORIES_EXPORT_PATH = "/api/categories/export-page";
 
+	// PLANS - PRODUCTS
+	private static final String PRODUCTS_PATH = "/api/products";
+	private static final String PRODUCTS_GET_ALL_PATH = "/api/products/get-all";
+	
 	// AUTH
 	private static final String AUTH_CREATE_USER_PATH = "/auth";
 	private static final String AUTH_REFRESH_TOKEN_PATH = "/auth/refresh";
@@ -75,11 +79,30 @@ public class GatewayConfig {
 				.route("delete-category",
 						r -> r.method(HttpMethod.DELETE).and().path(CATEGORIES_PATH + ALL_PARAMS)
 								.filters(f -> f.addRequestHeader(key, secretKey)).uri(plansServiceUri))
-				.route("delete-category",
+				.route("import-category",
 						r -> r.method(HttpMethod.GET).and().path(CATEGORIES_IMPORT_PATH)
 								.filters(f -> f.addRequestHeader(key, secretKey)).uri(plansServiceUri))
-				.route("delete-category",
+				.route("export-category",
 						r -> r.method(HttpMethod.GET).and().path(CATEGORIES_EXPORT_PATH)
+								.filters(f -> f.addRequestHeader(key, secretKey)).uri(plansServiceUri))
+				
+				// PRODUCTS
+				.route("get-categories",
+						r -> r.method(HttpMethod.GET).and().path(PRODUCTS_PATH)
+								.filters(f -> f.addRequestHeader(key, secretKey)).uri(plansServiceUri))
+				.route("get-all-categories",
+						r -> r.method(HttpMethod.GET).and().path(PRODUCTS_GET_ALL_PATH)
+								.filters(f -> f.addRequestHeader(key, secretKey)).uri(plansServiceUri))
+				.route("post-category",
+						r -> r.method(HttpMethod.POST).and().path(PRODUCTS_PATH + ALL_PARAMS)
+								.filters(f -> f.addRequestHeader(key, secretKey)).uri(plansServiceUri))
+
+				.route("put-category",
+						r -> r.method(HttpMethod.PUT).and().path(PRODUCTS_PATH + ALL_PARAMS)
+								.filters(f -> f.addRequestHeader(key, secretKey)).uri(plansServiceUri))
+
+				.route("delete-category",
+						r -> r.method(HttpMethod.DELETE).and().path(PRODUCTS_PATH + ALL_PARAMS)
 								.filters(f -> f.addRequestHeader(key, secretKey)).uri(plansServiceUri))
 
 				// AUTH
