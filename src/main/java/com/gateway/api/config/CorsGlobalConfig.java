@@ -14,7 +14,7 @@ public class CorsGlobalConfig {
     @Bean
     public CorsWebFilter corsWebFilter() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(Collections.singletonList("*")); // Use domínios específicos em produção
+        config.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));// Use domínios específicos em produção
         config.setAllowedMethods(Collections.singletonList("*"));
         config.setAllowedHeaders(Collections.singletonList("*"));
         config.setAllowCredentials(true);

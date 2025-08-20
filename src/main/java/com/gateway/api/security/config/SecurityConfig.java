@@ -1,7 +1,6 @@
 package com.gateway.api.security.config;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Collections;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
@@ -41,7 +40,7 @@ public class SecurityConfig {
 	    return http
 	            .csrf(ServerHttpSecurity.CsrfSpec::disable)
 	            .authorizeExchange(exchanges -> exchanges
-	                    .pathMatchers("/auth", "/auth/signin").permitAll()
+	                    .pathMatchers("/api/auth", "/api/auth/signin", "/api/products/get-all").permitAll()
 	                    .anyExchange().access(authorizationManager)
 	            )
 	            .oauth2ResourceServer(oauth2 -> oauth2

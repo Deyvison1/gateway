@@ -21,8 +21,7 @@ public class RoleBasedAuthorizationManager implements ReactiveAuthorizationManag
 
 	private final ITokenBlacklistService blacklistService;
 
-	private static final Map<String, List<String>> ACCESS_CONTROL_MAP = Map.of("/auth/**", List.of(), // rota pública,
-																										// lista vazia
+	private static final Map<String, List<String>> ACCESS_CONTROL_MAP = Map.of("/api/auth/**", List.of(),
 			"/api/**", List.of("ROLE_ADMIN") // rota protegida
 	);
 
@@ -44,7 +43,7 @@ public class RoleBasedAuthorizationManager implements ReactiveAuthorizationManag
 		String token = blacklistService.resolveToken(request); // ✅ Correto
 
 		// ⚠️ Se o path for exatamente "/logout", permite direto
-		if (path.equals("/auth/logout")) {
+		if (path.equals("/api/auth/logout")) {
 			blacklistService.blacklistToken(token);
 			return Mono.just(new AuthorizationDecision(true));
 		}
