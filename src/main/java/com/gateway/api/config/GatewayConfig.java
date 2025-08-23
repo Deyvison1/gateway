@@ -33,11 +33,14 @@ public class GatewayConfig {
 				.route("get-categories",
 						r -> r.method(HttpMethod.GET).and().path(Routes.CATEGORIES_PATH)
 								.filters(f -> f.addRequestHeader(key, secretKey)).uri(plansServiceUri))
+				.route("get-categories-complet",
+						r -> r.method(HttpMethod.GET).and().path(Routes.CATEGORIES_PATH + Routes.ALL_PARAMS)
+								.filters(f -> f.addRequestHeader(key, secretKey)).uri(plansServiceUri))
 				.route("get-all-categories",
 						r -> r.method(HttpMethod.GET).and().path(Routes.CATEGORIES_GET_ALL_PATH)
 								.filters(f -> f.addRequestHeader(key, secretKey)).uri(plansServiceUri))
 				.route("post-category",
-						r -> r.method(HttpMethod.POST).and().path(Routes.CATEGORIES_PATH +Routes.ALL_PARAMS)
+						r -> r.method(HttpMethod.POST).and().path(Routes.CATEGORIES_PATH + Routes.ALL_PARAMS)
 								.filters(f -> f.addRequestHeader(key, secretKey)).uri(plansServiceUri))
 
 				.route("put-category",
@@ -72,10 +75,37 @@ public class GatewayConfig {
 				.route("delete-category",
 						r -> r.method(HttpMethod.DELETE).and().path(Routes.PRODUCTS_PATH + Routes.ALL_PARAMS)
 								.filters(f -> f.addRequestHeader(key, secretKey)).uri(plansServiceUri))
+				
+				// ROLES
+				.route("get-roles",
+						r -> r.method(HttpMethod.GET).and().path(Routes.ROLES_PATH + Routes.ALL_PARAMS)
+								.filters(f -> f.addRequestHeader(key, secretKey)).uri(authServiceUri))
+				// ROLES
+				.route("create-roles",
+						r -> r.method(HttpMethod.POST).and().path(Routes.ROLES_PATH + Routes.ALL_PARAMS)
+								.filters(f -> f.addRequestHeader(key, secretKey)).uri(authServiceUri))
+				// USERS
+				
+				.route("get-login",
+						r -> r.method(HttpMethod.GET).and().path(Routes.USERS_FIND_BY_LOGIN + Routes.ALL_PARAMS)
+							.filters(f -> f.addRequestHeader(key, secretKey)).uri(authServiceUri))
+				.route("find-by-id",
+						r -> r.method(HttpMethod.GET).and().path(Routes.USERS_PATH + Routes.ALL_PARAMS)
+							.filters(f -> f.addRequestHeader(key, secretKey)).uri(authServiceUri))
+				
+				.route("get-user-id",
+						r -> r.method(HttpMethod.GET).and().path(Routes.USERS_FIND_BY_ID + Routes.ALL_PARAMS)
+							.filters(f -> f.addRequestHeader(key, secretKey)).uri(authServiceUri))
+				.route("create-user",
+						r -> r.method(HttpMethod.POST).and().path(Routes.USERS_PATH + Routes.ALL_PARAMS)
+							.filters(f -> f.addRequestHeader(key, secretKey)).uri(authServiceUri))
+				.route("delete-user",
+						r -> r.method(HttpMethod.DELETE).and().path(Routes.USERS_PATH + Routes.ALL_PARAMS)
+							.filters(f -> f.addRequestHeader(key, secretKey)).uri(authServiceUri))
 
 				// AUTH
 				.route("create-user",
-						r -> r.method(HttpMethod.POST).and().path(Routes.AUTH_CREATE_USER_PATH)
+						r -> r.method(HttpMethod.POST).and().path(Routes.USERS_CREATE_USER_PATH)
 								.filters(f -> f.addRequestHeader(key, secretKey)).uri(authServiceUri))
 
 				.route("signin",
