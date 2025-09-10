@@ -22,7 +22,7 @@ public class RoleBasedAuthorizationManager implements ReactiveAuthorizationManag
 	private final ITokenBlacklistService blacklistService;
 
 	private static final Map<String, List<String>> ACCESS_CONTROL_MAP = Map.of("/api/auth/**", List.of(),
-			"/api/**", List.of("ROLE_ADMIN") // rota protegida
+			"/api/**", List.of("ROLE_ADMIN", "ROLE_USER", "ROLE_PUBLIC") // rota protegida
 	);
 
 	public RoleBasedAuthorizationManager(final ITokenBlacklistService blacklistService) {

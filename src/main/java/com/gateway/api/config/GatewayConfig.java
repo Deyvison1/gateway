@@ -64,6 +64,9 @@ public class GatewayConfig {
 				.route("get-all-categories",
 						r -> r.method(HttpMethod.GET).and().path(Routes.PRODUCTS_GET_ALL_PATH)
 								.filters(f -> f.addRequestHeader(key, secretKey)).uri(plansServiceUri))
+				.route("get-by-id",
+						r -> r.method(HttpMethod.GET).and().path(Routes.PRODUCTS_PATH + Routes.ALL_PARAMS)
+								.filters(f -> f.addRequestHeader(key, secretKey)).uri(plansServiceUri))
 				.route("post-category",
 						r -> r.method(HttpMethod.POST).and().path(Routes.PRODUCTS_PATH + Routes.ALL_PARAMS)
 								.filters(f -> f.addRequestHeader(key, secretKey)).uri(plansServiceUri))
@@ -99,15 +102,17 @@ public class GatewayConfig {
 				.route("create-user",
 						r -> r.method(HttpMethod.POST).and().path(Routes.USERS_PATH + Routes.ALL_PARAMS)
 							.filters(f -> f.addRequestHeader(key, secretKey)).uri(authServiceUri))
+				.route("update-user",
+						r -> r.method(HttpMethod.PUT).and().path(Routes.USERS_PATH + Routes.ALL_PARAMS)
+							.filters(f -> f.addRequestHeader(key, secretKey)).uri(authServiceUri))
+				.route("update-simple-user",
+						r -> r.method(HttpMethod.PATCH).and().path(Routes.USERS_PATH + Routes.ALL_PARAMS)
+							.filters(f -> f.addRequestHeader(key, secretKey)).uri(authServiceUri))
 				.route("delete-user",
 						r -> r.method(HttpMethod.DELETE).and().path(Routes.USERS_PATH + Routes.ALL_PARAMS)
 							.filters(f -> f.addRequestHeader(key, secretKey)).uri(authServiceUri))
 
 				// AUTH
-				.route("create-user",
-						r -> r.method(HttpMethod.POST).and().path(Routes.USERS_CREATE_USER_PATH)
-								.filters(f -> f.addRequestHeader(key, secretKey)).uri(authServiceUri))
-
 				.route("signin",
 						r -> r.method(HttpMethod.POST).and().path(Routes.AUTH_SIGNI_PATH)
 								.filters(f -> f.addRequestHeader(key, secretKey)).uri(authServiceUri))
