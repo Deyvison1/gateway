@@ -30,4 +30,5 @@ public final class Routes {
 	
 	// ROLES
 	public static final String ROLES_PATH = PATH_API + "/roles";
+	public static final String ROLES_GET_ALL_PATH = PATH_API + ROLES_PATH + "/get-all";
 }

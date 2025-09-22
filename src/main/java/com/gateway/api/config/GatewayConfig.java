@@ -83,9 +83,20 @@ public class GatewayConfig {
 				.route("get-roles",
 						r -> r.method(HttpMethod.GET).and().path(Routes.ROLES_PATH + Routes.ALL_PARAMS)
 								.filters(f -> f.addRequestHeader(key, secretKey)).uri(authServiceUri))
+				.route("delete-role",
+						r -> r.method(HttpMethod.DELETE).and().path(Routes.ROLES_PATH + Routes.ALL_PARAMS)
+								.filters(f -> f.addRequestHeader(key, secretKey)).uri(authServiceUri))
 				// ROLES
 				.route("create-roles",
 						r -> r.method(HttpMethod.POST).and().path(Routes.ROLES_PATH + Routes.ALL_PARAMS)
+								.filters(f -> f.addRequestHeader(key, secretKey)).uri(authServiceUri))
+				
+				.route("update-roles",
+						r -> r.method(HttpMethod.PUT).and().path(Routes.ROLES_PATH + Routes.ALL_PARAMS)
+								.filters(f -> f.addRequestHeader(key, secretKey)).uri(authServiceUri))
+				
+				.route("get-all",
+						r -> r.method(HttpMethod.POST).and().path(Routes.ROLES_GET_ALL_PATH + Routes.ALL_PARAMS)
 								.filters(f -> f.addRequestHeader(key, secretKey)).uri(authServiceUri))
 				// USERS
 				
